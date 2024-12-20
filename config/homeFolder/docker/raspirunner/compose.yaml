@@ -1,0 +1,14 @@
+services:
+  raspirunner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./Raspi_Commands:/Raspi_Commands
+      - ./Commands:/root/Raspi_Runner/Commands
+      - ./raspirunner:/opt/raspirunner
+    environment:
+      - TZ=America/Los_Angeles
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    restart: unless-stopped

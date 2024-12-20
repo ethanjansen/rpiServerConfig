@@ -1,0 +1,17 @@
+services:
+  s3uploader:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: "host"
+    volumes:
+      - /home/ethan/.gnupg:/root/.gnupg
+      - ./aws:/root/.aws
+      - ./BACKUP:/media/root/BACKUP
+      - ./MACBACKUP:/media/root/MACBACKUP
+    environment:
+      - TZ=America/Los_Angeles
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    tty: true
+    restart: no

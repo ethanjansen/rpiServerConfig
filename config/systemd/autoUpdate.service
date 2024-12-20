@@ -1,0 +1,7 @@
+[Unit]
+Description=Update the system weekly on Sunday at 2AM
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/home/ethan/autoUpdate.sh

@@ -1,0 +1,31 @@
+---
+services:
+  unifi-network-application:
+    image: lscr.io/linuxserver/unifi-network-application:latest
+    container_name: unifi-network-application
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Los_Angeles
+      - MONGO_USER=unifi
+      - MONGO_PASS={REDACTED}
+      - MONGO_HOST=unifi-db
+      - MONGO_PORT=27017
+      - MONGO_DBNAME=unifi
+    volumes:
+      - /home/ethan/docker/unifi/unifi-network-application/data:/config
+    ports:
+      - 8443:8443
+      - 3478:3478/udp
+      - 10001:10001/udp
+      - 8080:8080
+    restart: unless-stopped
+  unifi-db:
+    image: docker.io/mongo:7.0.12-jammy
+    container_name: unifi-db
+    environment:
+      - TZ=America/Los_Angeles
+    volumes:
+      - /home/ethan/docker/unifi/mongodb/data:/data/db
+      - /home/ethan/docker/unifi/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    restart: unless-stopped
