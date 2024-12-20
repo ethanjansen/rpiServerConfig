@@ -16,24 +16,25 @@
 * Install Software
     * Remove any existing docker packages: `for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done`
     * Add docker GPG key to keyring:
-    ```
-    sudo apt-get Update
-    sudo apt-et install ca-certificates
-    sudo install -m 0755 -d /etc/apt/keyrings
-    sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-    sudo chmod a+r /etc/apt/keyrings/docker.asc
-    ```
+        ```
+        sudo apt-get Update
+        sudo apt-et install ca-certificates
+        sudo install -m 0755 -d /etc/apt/keyrings
+        sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+        sudo chmod a+r /etc/apt/keyrings/docker.asc
+        ```
     * Add docker repository [file](./config/apt/sources.list.d/docker.list) to /etc/apt/sources.list.d/
     * Install packages:
-    ```
-    sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin git gpg htop rsync screen
-    ```
+        ```
+        sudo apt-get update
+        sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin git gpg htop rsync screen
+        ```
 * Import (and trust) GPG key to use with s3uploader
 * Docker setup:
     * Add user to docker group
     * Copy [docker folder](./config/homeFolder/docker) to home folder
     * Add credentials as needed to all docker subfolders
+    * Create folders corresponding to docker volumes as needed
     * Add raspirunner commands and private ssh key
     * Import pihole settings, lists, and hostnames
     * Configure unifi
