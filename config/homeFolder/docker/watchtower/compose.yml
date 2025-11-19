@@ -1,6 +1,6 @@
 services:
   watchtower:
-    image: containrrr/watchtower:arm64v8-latest
+    image: nickfedor/watchtower:arm64v8-latest
     environment:
       TZ: America/Los_Angeles
       WATCHTOWER_CLEANUP: true
