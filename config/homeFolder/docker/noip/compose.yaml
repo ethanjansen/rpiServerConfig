@@ -1,0 +1,6 @@
+services:
+  noip:
+    image: ghcr.io/noipcom/noip-duc:latest
+    container_name: noip-duc
+    env_file: ./noip-duc.env
+    restart: unless-stopped

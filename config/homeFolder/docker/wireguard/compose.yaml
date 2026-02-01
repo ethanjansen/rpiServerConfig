@@ -23,8 +23,3 @@ services:
       - ./config:/config
       - /lib/modules:/lib/modules
     restart: unless-stopped
-  noip:
-    image: ghcr.io/noipcom/noip-duc:latest
-    container_name: noip-duc
-    env_file: ./noip-duc.env
-    restart: unless-stopped
