@@ -1,23 +1,34 @@
 #!/bin/bash
 
+# For file loop
+shopt -s nullglob
+
+# VARS
+DROPBOXUPLOADER="/opt/raspirunner/dropbox_uploader.sh"
+COMMAND_DIR="/Raspi_Commands"
+
 # loop forever
 while true; do
-	# wait
-	sleep 1
+  # wait
+  sleep 1
 
-	# download
-	/opt/raspirunner/dropbox_uploader.sh -q download /Raspi_Commands /
+  # download
+  "$DROPBOXUPLOADER" -q download "$COMMAND_DIR" /
 
-	# execute files and remove
-	files=$(ls "/Raspi_Commands/")
-	check=$(ls "/Raspi_Commands/" | wc -l)
-	if [[ $check == 0 ]]; then
-		continue
-	fi
-	for i in $files; do
-		chmod +x "/Raspi_Commands/$i"
-		"/Raspi_Commands/$i" > /dev/null 2>&1
-		rm "/Raspi_Commands/$i"
-		/opt/raspirunner/dropbox_uploader.sh delete "/Raspi_Commands/$i"
-	done
+  # execute file loop
+  for file in "$COMMAND_DIR"/*; do
+    # Check for missing and get name
+    if [ ! -f "$file" ]; then
+      echo "ERROR: $file missing or directory" >&2
+    fi
+    filename="$(basename "$file")"
+
+    # Execute
+    chmod +x "$file"
+    "$file" > /dev/null 2>&1
+
+    # Remove
+    rm "$file"
+    "$DROPBOXUPLOADER" delete "$COMMAND_DIR/$filename"
+  done
 done
