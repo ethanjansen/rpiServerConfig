@@ -10,7 +10,7 @@ services:
       - GUID=1000
       - TZ=America/Los_Angeles
       - SERVERURL={REDACTED}
-      - SERVERPORT=51820
+      - SERVERPORT=1194
       - PEERS=20
       - PEERDNS=auto
       - INTERNAL_SUBNET=10.10.10.0
