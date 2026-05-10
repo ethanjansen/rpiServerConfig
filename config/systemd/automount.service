@@ -1,0 +1,6 @@
+[Unit]
+Description=Automount drives
+
+[Service]
+Type=oneshot
+ExecStart=/opt/automount.sh
