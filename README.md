@@ -50,6 +50,9 @@
 * Configure Auto Update:
     * Use [archAutoUpdate](https://github.com/ethanjansen/archAutoUpdate)
     * Set timer for every Sunday at 02:00
+* Configure Auto Mount:
+    * Use script in [opt](./config/opt)
+    * Use systemd timer and service in [systemd](./config/systemd)
 * Docker setup:
     * Add ethan user to docker group
     * Copy [docker folder](./config/homeFolder/docker) to home folder
