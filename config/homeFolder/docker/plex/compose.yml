@@ -22,5 +22,9 @@ services:
     volumes:
       - './config:/config'  # ownership needs to match PLEX_UID:PLEX_GID or be updated with CHANGE_CONFIG_DIR_OWNERSHIP. Must contain 'Library/Application Support/Plex Media Server/'
       - './transcode:/transcode'
-      - '/media/ethan/MediaContent:/media/ethan/MediaContent'  # if moving old server make sure the container path matches library settings
+      - type: bind  # if moving old server make sure the container path matches library settings. Need slave propagation to allow host mount to appear in container mount
+        source: /media/ethan/MediaContent
+        target: /media/ethan/MediaContent
+        bind:
+          propagation: slave
     restart: unless-stopped
